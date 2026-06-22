@@ -34,10 +34,14 @@ public class PusheenSweetCrossingController implements GameController {
     libreria.bindKey("S", "MoverAbajo");
     libreria.bindKey("A", "MoverIzquierda");
     libreria.bindKey("D", "MoverDerecha");
+    libreria.bindKey("SPACE", "MoverCarros");
+    
+    actualizarTodoElMapa();
    }
   }
  }
-
+ 
+ @Override
  public void onCommand(String command) {
   if (command.equals("MoverArriba")) {
    game.moverArriba();
@@ -47,7 +51,10 @@ public class PusheenSweetCrossingController implements GameController {
    game.moverIzquierda();
   } else if (command.equals("MoverDerecha")){
    game.moverDerecha();
-  }
+  }else if (command.equals("MoverCarros")) {
+	  
+	   game.moverCarrosManualmente();
+	  }
   
  }
 
@@ -58,10 +65,16 @@ public class PusheenSweetCrossingController implements GameController {
  }
  
  public void actualizarTodoElMapa() {
-	  //Pintamos los fondos (pasto o carretera)
+	  //Fondos (pasto o carretera)
 	  for (int r = 0; r < 7; r++) {
 	   for (int c = 0; c < 15; c++) {
 	    libreria.setCellBackgroundImage(r, c, game.getImagenFondo(r, c));
+	    libreria.clearCellObjectImage(r, c);
+	    
+	    String objeto = game.getImagenObjeto(r, c);
+	    if (objeto != null) {
+	        libreria.setCellObjectImage(r, c, objeto);
+	    }
 	    Pusheen gato = game.getPusheen();
 	    dibujarPusheen(gato.getFilas(), gato.getColumnas(), gato.getDireccion());
 	   }
