@@ -11,43 +11,49 @@ public class Pusheen {
  }
 
  public void moverArriba() {
-  game.borrarPusheen(filas, columnas);
-  if (filas > 0) {
-   filas--;
-  } else {
-   filas=0;
-  }
-  game.dibujarPusheen(filas, columnas, direccion);
- }
+//	    game.borrarPusheen(filas, columnas);
+//	    if (filas - 1 >= 0) {
+//	        filas--;
+//	        direccion = 0; 
+//	    }
+//	    game.dibujarPusheen(filas, columnas, direccion);
+	}
 
- public void moverAbajo() {
-  game.borrarPusheen(filas, columnas);
-  if (filas < 6) {
-   filas++;
-  } else {
-   filas=6;
-  }
-  game.dibujarPusheen(filas, columnas, direccion);
- }
+	public void moverAbajo() {
+//	    game.borrarPusheen(filas, columnas);
+//	    if (filas + 1 < 7) {
+//	        filas++;
+//	        direccion = 2; 
+//	    }
+//	    game.dibujarPusheen(filas, columnas, direccion);
+	}
 
- public void moverDerecha() {
-  game.borrarPusheen(filas, columnas);
-  if (columnas < 14) {
-   columnas++;
-  } else {
-   columnas=14;
-  }
-  game.dibujarPusheen(filas, columnas, direccion);
- }
+	public void moverDerecha() {
+	    game.borrarPusheen(filas, columnas);
+	    if (columnas + 1 < 15) {
+	        columnas++;
+	        direccion = 1; 
+	    }
+	    game.dibujarPusheen(filas, columnas, direccion);
+	}
 
- public void moverIzquierda() {
-  game.borrarPusheen(filas, columnas);
-  if (columnas > 0) {
-   columnas--;
-  } else {
-   columnas=0;
-  }
-  game.dibujarPusheen(filas, columnas, direccion);
- }
+	public void moverIzquierda() {
+	    game.borrarPusheen(filas, columnas);
+	    if (columnas - 1 >= 0) {
+	        columnas--;
+	        direccion = 3;
+	    }
+	    game.dibujarPusheen(filas, columnas, direccion);
+	}
+	public int getFilas() {
+        return filas;
+    }
 
+    public int getColumnas() {
+        return columnas;
+    }
+
+    public int getDireccion() {
+        return direccion;
+    }
 }
