@@ -7,7 +7,8 @@ public class PusheenGame {
   private Random random = new Random();
   private String[][] mapaFondos = new String[7][15];
   
-  private String[][] mapaObjetos = new String[7][15];
+  // Cambiamos String por Auto para usar tu nueva clase
+  private Auto[][] mapaObjetos = new Auto[7][15];
 
   public PusheenGame(PusheenSweetCrossingController controller) {
    this.controller = controller;
@@ -68,7 +69,7 @@ public class PusheenGame {
 	              mapaObjetos[0][c] = null;
 	          }
 	          // Spawneamos un carro al principio de la carretera (columna 0) con dirección D
-	          mapaObjetos[0][0] = elegirCarroAleatorio("D");
+	          mapaObjetos[0][0] = crearAutoAleatorio("D");
 	      } else {
 	          // Carretera hacia la IZQUIERDA (Terminan en _i)
 	          for (int c = 0; c < 15; c++) {
@@ -76,29 +77,33 @@ public class PusheenGame {
 	              mapaObjetos[0][c] = null;
 	          }
 	          // Spawneamos un carro al final de la carretera (columna 14) con dirección I
-	          mapaObjetos[0][14] = elegirCarroAleatorio("I");
+	          mapaObjetos[0][14] = crearAutoAleatorio("I");
 	      }
 	      //Le avisamos al controlador que redibuje toda la pantalla
 	      controller.actualizarTodoElMapa();
 	  }
   
-  private String elegirCarroAleatorio(String direccion) {
+  private Auto crearAutoAleatorio(String direccion) {
       int modelo = random.nextInt(4); // 0, 1, 2 o 3
-      if (modelo == 0) return "CAMIOND-" + direccion;   // Camión Donas
-      if (modelo == 1) return "CAMIONHB-" + direccion;  // Camión Hamburguesa
-      if (modelo == 2) return "CAMIONH-" + direccion;   // Camión Helados
-      return "PANQUEQUECAR";                            // Panqueque funciona para ambos
+      String imagen = "PANQUEQUECAR";
+      
+      if (modelo == 0) imagen = "CAMIOND-" + direccion;   // Camión Donas
+      else if (modelo == 1) imagen = "CAMIONHB-" + direccion;  // Camión Hamburguesa
+      else if (modelo == 2) imagen = "CAMIONH-" + direccion;   // Camión Helados
+      
+      return new Auto(imagen, direccion);
   }
+  
   public void moverCarrosManualmente() {
       // Creamos una matriz temporal para calcular los movimientos sin pisar los datos actuales
-      String[][] nuevaMatrizObjetos = new String[7][15];
+      Auto[][] nuevaMatrizObjetos = new Auto[7][15];
       
       for (int r = 0; r < 7; r++) {
           for (int c = 0; c < 15; c++) {
-              String carro = mapaObjetos[r][c];
+              Auto carro = mapaObjetos[r][c];
               if (carro != null) {
                   // Si el carro va a la DERECHA o es el panqueque en carretera derecha
-                  if (carro.endsWith("-D") || (carro.equals("PANQUEQUECAR") && !mapaFondos[r][c].endsWith("_i"))) {
+                  if (carro.getDireccion().equals("D")) {
                       if (c + 1 < 15) {
                           nuevaMatrizObjetos[r][c + 1] = carro; // Avanza a la derecha
                       }
@@ -121,7 +126,10 @@ public class PusheenGame {
   }
 
   public String getImagenObjeto(int f, int c) { 
-      return mapaObjetos[f][c]; 
+      if (mapaObjetos[f][c] == null) {
+          return null;
+      }
+      return mapaObjetos[f][c].getImagen(); 
   }
 
   public Pusheen getPusheen() { 
