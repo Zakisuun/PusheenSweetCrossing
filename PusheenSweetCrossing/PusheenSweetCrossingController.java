@@ -52,11 +52,16 @@ public class PusheenSweetCrossingController implements GameController {
     }
 
     public void borrarPusheen(int filas, int columnas) {
-        this.libreria.clearCellObjectImage(filas, columnas);
+    	String objeto = game.getImagenObjeto(filas, columnas);
+        if (objeto != null) {
+            libreria.setCellObjectImage(filas, columnas, objeto);
+        } else {        	
+        	this.libreria.clearCellObjectImage(filas, columnas);
+        }
     }
 
     public void actualizarTodoElMapa() {
-        // Fondos (pasto o carretera) y objetos de fondo
+        // Fondos (pasto o carretera) y objetos fondo
         for (int r = 0; r < 7; r++) {
             for (int c = 0; c < 15; c++) {
                 libreria.setCellBackgroundImage(r, c, game.getImagenFondo(r, c));
@@ -85,5 +90,10 @@ public class PusheenSweetCrossingController implements GameController {
             Pusheenimg = "PusheenIzquierda";
         }
         this.libreria.setCellObjectImage(filas, columnas, Pusheenimg);
+    }
+    
+    public void perdiste() {
+    	libreria.configureGrid(1, 1, 1200, 600, false);
+    	libreria.setCellBackgroundImage(0, 0, "bugs_sad_bug");
     }
 }

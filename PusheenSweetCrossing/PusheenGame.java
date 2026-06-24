@@ -35,7 +35,7 @@ public class PusheenGame {
   public void inicializarMapaInicial() {
       for (int r = 0; r < 7; r++) {
           for (int c = 0; c < 15; c++) {
-              int numeroFila = (r % 4) + 1;
+              int numeroFila = (r % 7) + 1;
               int numeroColumna = c + 1;
               mapaFondos[r][c] = "PastoB_r" + numeroFila + "_c" + numeroColumna;
           }
@@ -51,7 +51,6 @@ public class PusheenGame {
                mapaFondos[r][c] = mapaFondos[r-1][c];
            }
        }
-       
        for (int i = 0; i < 100; i++) {
            if (listaAutos[i] != null) {
                listaAutos[i].bajarFila();
@@ -60,7 +59,6 @@ public class PusheenGame {
                }
            }
        }
-       
        int tipoFila = random.nextInt(3); 
        
        if (tipoFila == 0) {
@@ -84,7 +82,7 @@ public class PusheenGame {
        controller.actualizarTodoElMapa();
    }
   
-  private Auto crearAutoAleatorio(int direccion, int fila, int columna) {
+  public Auto crearAutoAleatorio(int direccion, int fila, int columna) {
       int modelo = random.nextInt(4); 
       String sufijo = "D";
       
@@ -101,6 +99,8 @@ public class PusheenGame {
           imagen = "CAMIONHB-" + sufijo;  
       } else if (modelo == 2) {
           imagen = "CAMIONH-" + sufijo;   
+      }else {
+    	  imagen = "PANQUEQUECAR";
       }
       
       return new Auto(imagen, direccion, fila, columna);
@@ -134,14 +134,14 @@ public class PusheenGame {
       
       for (int i = 0; i < 100; i++) {
           if (listaAutos[i] != null) {
-              if (listaAutos[i].getFilas() == pusheenFila) {
-                  if (listaAutos[i].getColumnas() == pusheenColumna) {
+              if (listaAutos[i].getFilas() == pusheenFila && listaAutos[i].getColumnas() == pusheenColumna) {
+            	  
                       pusheen.reiniciarPosicion();
                   }
               }
           }
       }
-  }
+  
   
   public String getImagenFondo(int f, int c) {
       return mapaFondos[f][c];

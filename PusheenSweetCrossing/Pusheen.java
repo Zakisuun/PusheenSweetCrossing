@@ -17,27 +17,29 @@ public class Pusheen {
     }
 
     public void moverDerecha() {
-        this.game.borrarPusheen(this.filas, this.columnas);
-        if (this.columnas + 1 < 15) {
-            this.columnas++;
-            this.direccion = 1;
+        this.game.borrarPusheen(filas, columnas);
+        if (columnas + 1 < 15) {
+            columnas++;
+            direccion = 1;
         }
-        this.game.dibujarPusheen(this.filas, this.columnas, this.direccion);
+        this.game.dibujarPusheen(filas, columnas, direccion);
     }
 
     public void moverIzquierda() {
-        this.game.borrarPusheen(this.filas, this.columnas);
-        if (this.columnas - 1 >= 0) {
-            this.columnas--;
-            this.direccion = 3;
+        this.game.borrarPusheen(filas, columnas);
+        if (columnas - 1 >= 0) {
+            columnas--;
+            direccion = 3;
         }
-        this.game.dibujarPusheen(this.filas, this.columnas, this.direccion);
+        this.game.dibujarPusheen(filas, columnas, direccion);
     }
 
     public void reiniciarPosicion() {
-        this.filas = 3;
-        this.columnas = 7;
-        this.direccion = 0;
+        this.game.borrarPusheen(filas, columnas);
+        filas = 3;
+        columnas = 7;
+        direccion = 0;
+        this.game.dibujarPusheen(filas, columnas, direccion);
     }
 
     public int getFilas() {
