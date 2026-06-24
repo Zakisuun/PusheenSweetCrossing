@@ -1,59 +1,54 @@
 package edu.upb.lp.game.PusheenSweetCrossing;
 
 public class Pusheen {
- private PusheenGame game;
- private int direccion = 0;
- private int filas = 3;
- private int columnas = 7;
+    private PusheenGame game;
+    private int direccion = 0;
+    private int filas = 3;
+    private int columnas = 7;
 
- public Pusheen(PusheenGame game) {
-  this.game = game;
- }
+    public Pusheen(PusheenGame game) {
+        this.game = game;
+    }
 
- public void moverArriba() {
-//	    game.borrarPusheen(filas, columnas);
-//	    if (filas - 1 >= 0) {
-//	        filas--;
-//	        direccion = 0; 
-//	    }
-//	    game.dibujarPusheen(filas, columnas, direccion);
-	}
+    public void moverArriba() {
+    }
 
-	public void moverAbajo() {
-//	    game.borrarPusheen(filas, columnas);
-//	    if (filas + 1 < 7) {
-//	        filas++;
-//	        direccion = 2; 
-//	    }
-//	    game.dibujarPusheen(filas, columnas, direccion);
-	}
+    public void moverAbajo() {
+    }
 
-	public void moverDerecha() {
-	    game.borrarPusheen(filas, columnas);
-	    if (columnas + 1 < 15) {
-	        columnas++;
-	        direccion = 1; 
-	    }
-	    game.dibujarPusheen(filas, columnas, direccion);
-	}
+    public void moverDerecha() {
+        this.game.borrarPusheen(this.filas, this.columnas);
+        if (this.columnas + 1 < 15) {
+            this.columnas++;
+            this.direccion = 1;
+        }
+        this.game.dibujarPusheen(this.filas, this.columnas, this.direccion);
+    }
 
-	public void moverIzquierda() {
-	    game.borrarPusheen(filas, columnas);
-	    if (columnas - 1 >= 0) {
-	        columnas--;
-	        direccion = 3;
-	    }
-	    game.dibujarPusheen(filas, columnas, direccion);
-	}
-	public int getFilas() {
-        return filas;
+    public void moverIzquierda() {
+        this.game.borrarPusheen(this.filas, this.columnas);
+        if (this.columnas - 1 >= 0) {
+            this.columnas--;
+            this.direccion = 3;
+        }
+        this.game.dibujarPusheen(this.filas, this.columnas, this.direccion);
+    }
+
+    public void reiniciarPosicion() {
+        this.filas = 3;
+        this.columnas = 7;
+        this.direccion = 0;
+    }
+
+    public int getFilas() {
+        return this.filas;
     }
 
     public int getColumnas() {
-        return columnas;
+        return this.columnas;
     }
 
     public int getDireccion() {
-        return direccion;
+        return this.direccion;
     }
 }
