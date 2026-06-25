@@ -58,6 +58,7 @@ public class Pusheen {
 	}
 	
 	public void perderVida() {
+		if(vidas>0)
 		vidas--;
 	}
 	

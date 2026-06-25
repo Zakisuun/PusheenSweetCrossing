@@ -100,8 +100,13 @@ public class PusheenSweetCrossingController implements GameController {
 	}
 	
 	public void perdiste() {
-    	libreria.configureGrid(1, 1, 1200, 600, false);
-    	libreria.setCellBackgroundImage(0, 0, "GameOver");
+    	libreria.configureGrid(7, 15, 1200, 600, false);
+    	for (int r = 0; r < 7; r++) {
+			for (int c = 0; c < 15; c++) {
+				String nombreImagen = "GameOver_r" + (r + 1) + "_c" + (c + 1);
+				libreria.setCellBackgroundImage(r, c, nombreImagen);
+			}
+		}
     }
 	
 	public void dibujarVidas() {
