@@ -5,13 +5,13 @@ import edu.upb.lp.game.core.GameUI;
 
 public class PusheenSweetCrossingController implements GameController {
 	private GameUI libreria;
+	private boolean gameEnded = false;
 
 	private PusheenGame game = new PusheenGame(this);
 
 	public PusheenSweetCrossingController(GameUI libreria) {
 		this.libreria = libreria;
 	}
-
 
 	public void onCellPressed(int row, int col) {
 
@@ -35,27 +35,32 @@ public class PusheenSweetCrossingController implements GameController {
 
 		actualizarTodoElMapa();
 		dibujarVidas();
+
+		game.start();
 	}
-	
+
 	public void onButtonPressed(String name) {
-		if(name.equals("Reiniciar")) {
+		if (name.equals("Reiniciar")) {
+			gameEnded = false;
 			game.reiniciarJuego();
-			initialiseInterface(); 
+			initialiseInterface();
 			actualizarTodoElMapa();
 		}
 	}
 
 	public void onCommand(String command) {
-		if (command.equals("MoverArriba")) {
-			game.moverArriba();
-		} else if (command.equals("MoverAbajo")) {
-			game.moverAbajo();
-		} else if (command.equals("MoverIzquierda")) {
-			game.moverIzquierda();
-		} else if (command.equals("MoverDerecha")) {
-			game.moverDerecha();
-		} else if (command.equals("MoverCarros")) {
-			game.moverCarrosManualmente();
+		if (!gameEnded) {
+			if (command.equals("MoverArriba")) {
+				game.moverArriba();
+			} else if (command.equals("MoverAbajo")) {
+				game.moverAbajo();
+			} else if (command.equals("MoverIzquierda")) {
+				game.moverIzquierda();
+			} else if (command.equals("MoverDerecha")) {
+				game.moverDerecha();
+			} else if (command.equals("MoverCarros")) {
+				game.moverCarros();
+			}
 		}
 	}
 
@@ -98,19 +103,29 @@ public class PusheenSweetCrossingController implements GameController {
 		Pusheen gato = game.getPusheen();
 		dibujarPusheen(gato.getFilas(), gato.getColumnas(), gato.getDireccion());
 	}
-	
+
 	public void perdiste() {
-    	libreria.configureGrid(7, 15, 1200, 600, false);
-    	for (int r = 0; r < 7; r++) {
+		gameEnded = true;
+		libreria.configureGrid(7, 15, 1200, 600, false);
+		for (int r = 0; r < 7; r++) {
 			for (int c = 0; c < 15; c++) {
 				String nombreImagen = "GameOver_r" + (r + 1) + "_c" + (c + 1);
 				libreria.setCellBackgroundImage(r, c, nombreImagen);
 			}
 		}
-    }
-	
+	}
+
 	public void dibujarVidas() {
 		libreria.setLabel("vidas", "Vidas: " + game.getVidas());
+	}
+
+	public String executeRepeatedly(Runnable r, int ms) {
+		return libreria.executeRepeatedly(r, ms);
+
+	}
+
+	public void stopLoop(String id) {
+		libreria.stopLoop(id);
 	}
 
 }

@@ -14,30 +14,32 @@ public class Auto {
     }
 
     public void mover() {
-        if (this.direccion == 0) {
-            this.columnas = this.columnas + 1;
+        if (direccion == 0) { //va a ir derecha
+            columnas = columnas + 1;
         } else {
-            this.columnas = this.columnas - 1;
+            columnas = columnas - 1;
         }
     }
 
-    public void bajarFila() {
-        this.filas = this.filas + 1;
-    }
+	public int getFilas() {
+		return filas;
+	}
 
-    public String getImagen() {
-        return this.imagen;
-    }
+	public int getColumnas() {
+		return columnas;
+	}
 
-    public int getDireccion() {
-        return this.direccion;
-    }
+	public String getImagen() {
+		return imagen;
+	}
 
-    public int getFilas() {
-        return this.filas;
-    }
-
-    public int getColumnas() {
-        return this.columnas;
-    }
+	public void bajarFila() {
+		filas = filas + 1; // 
+	}
+	
+	//mayores dificultades y logros, problemas, estructura=> clases quienes hablan con quienes, como están conectados
+	// codigo interesante 
+	// diapositivas recomendadas
+	// demostración de juego 
+	// preguntas de como es que el objeto hace algo, conocer los métodos
 }
