@@ -26,12 +26,14 @@ public class PusheenSweetCrossingController implements GameController {
 				libreria.setCellBackgroundImage(r, c, nombreImagen);
 			}
 		}
+		libreria.setLabel("pusheensweetcrossing", "Pusheen Sweet Crossing");
 		libreria.bindKey("W", "MoverArriba");
 		libreria.bindKey("S", "MoverAbajo");
 		libreria.bindKey("A", "MoverIzquierda");
 		libreria.bindKey("D", "MoverDerecha");
-		libreria.bindKey("L", "MoverCarros");
+		
 		libreria.addButton("Reiniciar");
+		
 
 		actualizarTodoElMapa();
 		dibujarVidas();
@@ -58,8 +60,6 @@ public class PusheenSweetCrossingController implements GameController {
 				game.moverIzquierda();
 			} else if (command.equals("MoverDerecha")) {
 				game.moverDerecha();
-			} else if (command.equals("MoverCarros")) {
-				game.moverCarros();
 			}
 		}
 	}
@@ -113,6 +113,7 @@ public class PusheenSweetCrossingController implements GameController {
 				libreria.setCellBackgroundImage(r, c, nombreImagen);
 			}
 		}
+		game.stop();
 	}
 
 	public void dibujarVidas() {
@@ -121,7 +122,6 @@ public class PusheenSweetCrossingController implements GameController {
 
 	public String executeRepeatedly(Runnable r, int ms) {
 		return libreria.executeRepeatedly(r, ms);
-
 	}
 
 	public void stopLoop(String id) {
